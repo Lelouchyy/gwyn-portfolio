@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink:    #0b1628;
+  --navy:   #102040;
+  --navy2:  #1a3560;
+  --navy3:  #22477a;
+  --gold:   #c8a84b;
+  --gold2:  #e2c26e;
+  --gold3:  #f5e4b0;
+  --cream:  #f9f7f2;
+  --paper:  #f2efe8;
+  --line:   #e4e0d6;
+  --muted:  #8e8b84;
+  --body:   #3d3a34;
+  --ease:   cubic-bezier(.4,0,.2,1);
+  --spring: cubic-bezier(.34,1.56,.64,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--body);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: .025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+/* ─── Animations ─── */
+@keyframes fuUp        { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+@keyframes rotateSlow  { to   { transform:translate(-50%,-50%) rotate(360deg); } }
+@keyframes floatY      { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+@keyframes strk        { 0% { top:-100%; } 100% { top:100%; } }
+@keyframes marqueeLoop { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+@keyframes pgreen      { 0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(74,222,128,.4); } 50% { opacity:.8; box-shadow:0 0 0 5px rgba(74,222,128,0); } }
+
+/* ─── Reveal helpers ─── */
+.rv  { opacity:0; transform:translateY(28px);  transition:opacity .7s var(--ease), transform .7s var(--ease); }
+.rvl { opacity:0; transform:translateX(-28px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+.rvr { opacity:0; transform:translateX(28px);  transition:opacity .7s var(--ease), transform .7s var(--ease); }
+.rv.in, .rvl.in, .rvr.in { opacity:1; transform:none; }
+
+/* ─── Marquee ─── */
+.mloop { display:flex; width:max-content; white-space:nowrap; animation:marqueeLoop 70s linear infinite; will-change:transform; }
+.mtrack { display:flex; flex-shrink:0; gap:0; white-space:nowrap; }
+
+/* ─── Skill bar fill ─── */
+.skfl { height:100%; background:linear-gradient(90deg,var(--gold) 0%,var(--gold2) 100%); border-radius:2px; width:0; transition:width 1.2s cubic-bezier(.4,0,.2,1); }
+
+/* ─── Scroll-cue line ─── */
+.scue-tr { width:1px; height:52px; background:var(--line); position:relative; overflow:hidden; }
+.scue-tr::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--gold); animation:strk 2s ease-in-out infinite; }
+
+/* ─── Custom cursor ─── */
+#cur { position:fixed; pointer-events:none; z-index:9999; mix-blend-mode:multiply; }
+#cdot  { width:8px; height:8px; background:var(--gold); border-radius:50%; position:absolute; transform:translate(-50%,-50%); }
+#cring { width:36px; height:36px; border:1.5px solid var(--navy); border-radius:50%; position:absolute; transform:translate(-50%,-50%); transition:all .18s var(--ease); opacity:.4; }
+body.ch #cring { width:54px; height:54px; opacity:.22; border-color:var(--gold); }
+body.ch #cdot  { transform:translate(-50%,-50%) scale(1.5); }
+
+/* ─── Input resets ─── */
+input, textarea { -webkit-appearance: none; appearance: none; }
