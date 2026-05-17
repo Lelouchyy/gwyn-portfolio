@@ -1,6 +1,6 @@
 import React from 'react'
 import { SectionLabel } from '../ui/SectionLabel'
-import { SKILL_BARS, SOFT_SKILLS, TOOLS } from '../../data'
+import { SKILL_BARS, SOFT_SKILLS } from '../../data'
 import { useSkillBars } from '../../hooks/useSkillBars'
 
 export const Skills: React.FC = () => {
@@ -44,24 +44,6 @@ export const Skills: React.FC = () => {
                 </div>
               </div>
             ))}
-
-            {/* Tools */}
-            <div className="mt-9">
-              <div className="mb-3.5 border-b border-white/18 pb-3 text-[.7rem] font-semibold uppercase tracking-[.18em] text-gold2">
-                Tools &amp; Platforms
-              </div>
-              <div className="flex flex-wrap gap-[.55rem] mt-2">
-                {TOOLS.map((t) => (
-                  <div
-                    key={t.name}
-                    className="tchip inline-flex cursor-default items-center gap-[.5rem] rounded-[20px] border border-white/30 bg-[rgba(255,255,255,.08)] px-4 py-[.48rem] text-[.74rem] font-medium text-white shadow-[0_10px_24px_rgba(7,12,24,.16)] backdrop-blur-sm transition-all duration-200 hover:scale-105 hover:border-[rgba(226,194,110,.5)] hover:bg-[rgba(255,255,255,.14)] hover:text-gold2"
-                  >
-                    <div className="h-[6px] w-[6px] flex-shrink-0 rounded-full bg-gold2 shadow-[0_0_0_4px_rgba(200,168,75,.12)]" />
-                    {t.name}
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Soft skills */}

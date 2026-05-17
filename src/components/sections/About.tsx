@@ -10,8 +10,10 @@ import pic7 from '../../assets/pic7.jpeg'
 import pic8 from '../../assets/pic8.jpeg'
 import pic9 from '../../assets/pic9.jpeg'
 import pic10 from '../../assets/pic10.jpeg'
+import samplepic from '../../assets/samplepic.jpg'
 
 import { SectionLabel } from '../ui/SectionLabel'
+import { TOOLS } from '../../data'
 
 const strengths = [
   {
@@ -31,7 +33,10 @@ const strengths = [
   },
 ]
 
-const aboutPhotos = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10]
+
+const aboutPhotos = [samplepic,samplepic,samplepic]
+
+// const aboutPhotos = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10]
 
 export const About: React.FC = () => {
   const [activePhotoIndex, setActivePhotoIndex] = useState(0)
@@ -125,14 +130,31 @@ export const About: React.FC = () => {
               ready to make an immediate impact.
             </p>
 
-            <div className="grid grid-cols-1 gap-3.5 mt-10 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-8">
+              <div className="mb-3 text-[.7rem] font-semibold uppercase tracking-[.18em] text-muted">
+                Tools &amp; Platforms
+              </div>
+              <div className="flex flex-wrap gap-[.65rem]">
+                {TOOLS.map((tool) => (
+                  <div
+                    key={tool.name}
+                    className="inline-flex cursor-default items-center gap-[.5rem] rounded-[20px] border border-line bg-white px-4 py-[.52rem] text-[.74rem] font-medium text-navy shadow-[0_8px_24px_rgba(11,22,40,.05)] transition-all duration-200 hover:border-gold/45 hover:bg-[rgba(200,168,75,.08)] hover:text-gold hover:-translate-y-0.5"
+                  >
+                    <div className="h-[6px] w-[6px] flex-shrink-0 rounded-full bg-gold shadow-[0_0_0_4px_rgba(200,168,75,.12)]" />
+                    {tool.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 gap-3.5 sm:grid-cols-2 xl:grid-cols-3">
               {strengths.map((s) => (
                 <div key={s.title} className="group scard relative h-full overflow-hidden rounded-[8px] border border-line bg-white p-5 shadow-[0_2px_16px_rgba(11,22,40,.05)] transition-all duration-300 hover:-translate-y-[5px] hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(11,22,40,.10)]">
                   <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-[5px] bg-[rgba(200,168,75,.1)] text-gold transition-all duration-300 group-hover:bg-gold group-hover:text-white [&>svg]:h-4 [&>svg]:w-4 [&>svg]:stroke-[1.8]">
                     {s.icon}
                   </div>
-                  <div className="text-[.84rem] font-semibold text-navy mb-[.28rem] transition-colors duration-300 group-hover:text-gold">{s.title}</div>
-                  <div className="text-[.74rem] text-muted leading-[1.55]">{s.desc}</div>
+                  <div className="mb-[.28rem] text-[.84rem] font-semibold text-navy transition-colors duration-300 group-hover:text-gold">{s.title}</div>
+                  <div className="text-[.74rem] leading-[1.55] text-muted">{s.desc}</div>
                   <div className="pointer-events-none absolute bottom-0 left-5 h-[2px] w-[calc(100%-2.5rem)] origin-left scale-x-0 rounded-full bg-gradient-to-r from-gold to-gold2 transition-transform duration-300 group-hover:scale-x-100" />
                 </div>
               ))}
